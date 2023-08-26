@@ -12,7 +12,7 @@ terraform {
 # Provider Block
 provider "aws" {
   region  = var.aws_region
-  profile = "default"
+  # profile = "default"
   access_key = var.accesskey
   secret_key = var.secretkey
 }
