@@ -5,10 +5,22 @@ resource "aws_instance" "JenkinsEc2" {
   key_name      = var.instance_keypair
   # Commented below as we are using null resorce to install Jenkins.sh file
   # user_data     = file("${path.module}/jenkins.sh")
-   vpc_security_group_ids = [aws_security_group.vpc_web.id]
+  vpc_security_group_ids = [aws_security_group.vpc_web.id]
   tags = {
     "Name" = "JenkinsEC2"
   }
+}
+
+# EIP
+resource "aws_eip" "myeip" {
+  # instance = aws_instance.JenkinsEc2.id
+  vpc      = true
+}
+
+# EIP Association
+resource "aws_eip_association" "eip_asso" {
+  instance_id = aws_instance.JenkinsEc2.id
+  allocation_id = aws_eip.myeip.id
 }
 
 # Create Security Group - Web Traffic
@@ -44,18 +56,18 @@ resource "aws_security_group" "vpc_web" {
 # Create null resorce to insatll the Jenkins shell script through provisioner
 
 resource "null_resource" "myprovisioner" {
-  
+
   # ssh into the EC2 instance
   connection {
-    type = "ssh"
-    user = "ec2-user"
-    host = aws_instance.JenkinsEc2.public_ip
+    type        = "ssh"
+    user        = "ec2-user"
+    host        = aws_instance.JenkinsEc2.public_ip
     private_key = file("${path.module}/private-key/terraform-key.pem")
   }
 
   # copy the jenkins.sh file to EC2 instance using file provisioner
   provisioner "file" {
-    source = "jenkins.sh"
+    source      = "jenkins.sh"
     destination = "/tmp/jenkins.sh"
   }
 

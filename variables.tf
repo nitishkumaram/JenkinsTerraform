@@ -1,13 +1,13 @@
 variable "aws_region" {
   description = "Region"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"
 }
 
 variable "ami" {
   description = "AMI ID of the amazon EC2 instance"
   type        = string
-  default     = "ami-0b5eea76982371e91"
+  # default     = "ami-06f621d90fa29f6d0" configured it in terraform variable
 }
 
 variable "instancetype" {
