@@ -13,6 +13,6 @@ terraform {
 provider "aws" {
   region  = var.aws_region
   # profile = "default"
-  access_key = var.accesskey
-  secret_key = var.secretkey
+  # access_key = var.accesskey
+  # secret_key = var.secretkey
 }
