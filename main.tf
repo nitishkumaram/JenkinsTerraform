@@ -58,11 +58,20 @@ resource "aws_security_group" "vpc_web" {
 resource "null_resource" "myprovisioner" {
 
   # ssh into the EC2 instance
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    host        = aws_instance.JenkinsEc2.public_ip
-    private_key = file("${path.module}/private-key/terraform-key.pem")
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ec2-user"
+  #   host        = aws_instance.JenkinsEc2.public_ip
+  #   private_key = file("${path.module}/private-key/terraform-key.pem")
+  # }
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      host        = "ec2-user"
+      user        = aws_instance.JenkinsEc2.public_ip
+      private_key = file("${path.module}/private-key/terraform-key.pem")
+    }
   }
 
   # copy the jenkins.sh file to EC2 instance using file provisioner
