@@ -21,3 +21,13 @@ variable "instance_keypair" {
   type        = string
   default     = "terraform-key"
 }
+
+variable "accesskey" {
+  description = "access_key for the AWS"
+  type        = string
+}
+
+variable "secretkey" {
+  description = "secret_key for the AWS"
+  type        = string
+}
