@@ -63,7 +63,7 @@ resource "null_resource" "myprovisioner" {
     user        = "ec2-user"
     host        = aws_instance.JenkinsEc2.public_ip
     # private_key = file("${path.module}/private-key/terraform-key.pem")
-    private_key = file("/terraform-key.pem")
+    private_key = "/terraform-key.pem"
   }
 
 
