@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "Region"
   type        = string
-  default     = "ap-south-1"
+  default     = "us-east-1"
 }
 
 variable "ami" {
