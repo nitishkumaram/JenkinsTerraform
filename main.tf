@@ -11,7 +11,7 @@ resource "aws_instance" "JenkinsEc2" {
   }
 
   # User Data
-  user_data = file("jenkins.sh")
+  user_data = file("jenkins_new.sh")
 }
 
 # EIP
