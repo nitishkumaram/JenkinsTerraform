@@ -58,34 +58,34 @@ resource "aws_security_group" "vpc_web" {
 
 # Create null resorce to insatll the Jenkins shell script through provisioner
 
-# resource "null_resource" "myprovisioner" {
+resource "null_resource" "myprovisioner" {
 
-#   # ssh into the EC2 instance
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     host        = aws_instance.JenkinsEc2.public_ip
-#     # private_key = file("${path.module}/private-key/terraform-key.pem")
-#     private_key = "/terraform-key.pem"
-#   }
+  # ssh into the EC2 instance
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    host        = aws_instance.JenkinsEc2.public_ip
+    private_key = file("${path.module}/private-key/terraform-key.pem")
+    # private_key = "/terraform-key.pem"
+  }
 
 
-#   # copy the jenkins.sh file to EC2 instance using file provisioner
-#   provisioner "file" {
-#     source      = "jenkins.sh"
-#     destination = "/tmp/jenkins.sh"
-#   }
+  # copy the jenkins.sh file to EC2 instance using file provisioner
+  provisioner "file" {
+    source      = "jenkins_tfcloud.sh"
+    destination = "/tmp/jenkins_tfcloud.sh"
+  }
 
-#   # Set permission and run the jenkins.sh file using remote provisioner
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo chmod +x /tmp/jenkins.sh",
-#       "sh /tmp/jenkins.sh"
-#     ]
-#   }
+  # Set permission and run the jenkins.sh file using remote provisioner
+  provisioner "remote-exec" {
+    inline = [
+      "sudo chmod +x /tmp/jenkins_tfcloud.sh",
+      "sh /tmp/jenkins_tfcloud.sh"
+    ]
+  }
 
-#   # Lifecycle dependency
-#   depends_on = [
-#     aws_instance.JenkinsEc2
-#   ]
-# }
+  # Lifecycle dependency
+  depends_on = [
+    aws_instance.JenkinsEc2
+  ]
+}
