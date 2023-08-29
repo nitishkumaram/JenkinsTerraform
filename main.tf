@@ -11,7 +11,7 @@ resource "aws_instance" "JenkinsEc2" {
   }
 
   # User Data
-  user_data = file("jenkins_tfcloud.sh")
+  user_data = file("${path.module}/jenkins_tfcloud.sh")
 }
 
 # EIP
