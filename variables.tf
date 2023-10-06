@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "ami" {
   description = "AMI ID of the amazon EC2 instance"
   type        = string
-  # default     = "ami-06f621d90fa29f6d0" configured it in terraform variable
+  default     = "ami-067d1e60475437da2" #configured it in terraform variable
 }
 
 variable "instancetype" {
@@ -25,6 +25,7 @@ variable "instance_keypair" {
 variable "accesskey" {
   description = "access_key for the AWS"
   type        = string
+  default = "AKIARD6HXBYEDQ4TI3LN"
 }
 
 variable "secretkey" {
