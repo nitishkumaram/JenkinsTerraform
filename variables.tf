@@ -16,16 +16,16 @@ variable "instancetype" {
   default     = "t2.micro"
 }
 
-variable "instance_keypair" {
-  description = "Key pair for the terraform"
-  type        = string
-  default     = "terraform-key"
-}
+# variable "instance_keypair" {
+#   description = "Key pair for the terraform"
+#   type        = string
+#   # default     = "terraform-key"
+# }
 
 variable "accesskey" {
   description = "access_key for the AWS"
   type        = string
-  default = "AKIARD6HXBYEDQ4TI3LN"
+  default     = "AKIARD6HXBYEDQ4TI3LN"
 }
 
 variable "secretkey" {

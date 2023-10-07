@@ -17,3 +17,4 @@ FUTURE-TOPICS
 
 # Ignore .pem files
 *.pem
+id_rsa*
