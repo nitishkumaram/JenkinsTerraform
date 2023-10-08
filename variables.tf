@@ -25,7 +25,7 @@ variable "instance_keypair" {
 variable "accesskey" {
   description = "access_key for the AWS"
   type        = string
-  default = "AKIARD6HXBYEDQ4TI3LN"
+  default     = "AKIARD6HXBYEDQ4TI3LN"
 }
 
 variable "secretkey" {
