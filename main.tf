@@ -39,7 +39,7 @@ resource "aws_instance" "JenkinsEc2" {
 
 # Create Security Group - Web Traffic
 resource "aws_security_group" "vpc_web" {
-  name        = "vpc-web"
+  name        = "vpc-web-cloud"
   description = "VPC SG WEB"
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -63,7 +63,7 @@ resource "aws_security_group" "vpc_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "vpc-web"
+    Name = "vpc-web-cloud"
   }
 }
 
