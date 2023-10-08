@@ -3,7 +3,7 @@
 # Enter file in which to save the key (/Users/nitishkumar/.ssh/id_rsa): ./id_rsa
 
 resource "aws_key_pair" "key-tf" {
-  key_name   = "key-tf-cloud"
+  key_name   = var.keyName
   public_key = var.id_rsa_pub
 }
 
@@ -18,7 +18,7 @@ resource "aws_instance" "JenkinsEc2" {
   key_name      = aws_key_pair.key-tf.key_name
   vpc_security_group_ids = [aws_security_group.vpc_web.id]
   tags = {
-    "Name" = "JenkinsEC2-cloud"
+    "Name" = var.EC2_Name
   }
 
   # User Data
@@ -39,7 +39,7 @@ resource "aws_instance" "JenkinsEc2" {
 
 # Create Security Group - Web Traffic
 resource "aws_security_group" "vpc_web" {
-  name        = "vpc-web-cloud"
+  name        = var.securitygroup
   description = "VPC SG WEB"
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -63,40 +63,6 @@ resource "aws_security_group" "vpc_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "vpc-web-cloud"
+    Name = var.securitygroup_tags
   }
 }
-
-# Create null resorce to insatll the Jenkins shell script through provisioner
-
-# resource "null_resource" "myprovisioner" {
-
-#   # ssh into the EC2 instance
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     host        = aws_instance.JenkinsEc2.public_ip
-#     private_key = file("${path.module}/userdata/terraform-key.pem")
-#     # private_key = "/terraform-key.pem"
-#   }
-
-
-#   # copy the jenkins.sh file to EC2 instance using file provisioner
-#   provisioner "file" {
-#     source      = "jenkins_tfcloud.sh"
-#     destination = "/tmp/jenkins_tfcloud.sh"
-#   }
-
-#   # Set permission and run the jenkins.sh file using remote provisioner
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo chmod +x /tmp/jenkins_tfcloud.sh",
-#       "sh /tmp/jenkins_tfcloud.sh"
-#     ]
-#   }
-
-#   # Lifecycle dependency
-#   depends_on = [
-#     aws_instance.JenkinsEc2
-#   ]
-# }
