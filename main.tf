@@ -4,7 +4,7 @@
 
 resource "aws_key_pair" "key-tf" {
   key_name   = "key-tf-cloud"
-  public_key = var.id_rsa.pub
+  public_key = var.id_rsa_pub
 }
 
 output "key_name" {
