@@ -32,3 +32,8 @@ variable "secretkey" {
   description = "secret_key for the AWS"
   type        = string
 }
+
+variable "id_rsa_pub" {
+  description = "id_rsa_pub for the AWS"
+  type        = string
+}

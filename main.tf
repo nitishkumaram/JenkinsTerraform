@@ -3,8 +3,8 @@
 # Enter file in which to save the key (/Users/nitishkumar/.ssh/id_rsa): ./id_rsa
 
 resource "aws_key_pair" "key-tf" {
-  key_name   = "key-tf"
-  public_key = file("${path.module}/id_rsa.pub")
+  key_name   = "key-tf-cloud"
+  public_key = var.id_rsa.pub
 }
 
 output "key_name" {
@@ -18,7 +18,7 @@ resource "aws_instance" "JenkinsEc2" {
   key_name      = aws_key_pair.key-tf.key_name
   vpc_security_group_ids = [aws_security_group.vpc_web.id]
   tags = {
-    "Name" = "JenkinsEC2"
+    "Name" = "JenkinsEC2-cloud"
   }
 
   # User Data
